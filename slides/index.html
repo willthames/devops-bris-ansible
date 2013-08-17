@@ -14,7 +14,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
     <!-- For syntax highlighting -->
@@ -46,28 +46,26 @@
         </section>
 
         <section>
+          <h2>About this presentation</h2>
           <p>
           This presentation is available at:<br/>
           <a href="http://github.com/willthames/devops-bris-ansible">http://github.com/willthames/devops-bris-ansible/slides</a><br/></p>
-          <pre><code data-trim contenteditable>
-git clone http://github.com/willthames/devops-bris-ansible
-cd devops-bris-ansible/slides
-python -m SimpleHTTPServer</code></pre>
           <p>All code samples are included in the same repo, under examples</p>
-
+          <p>To save you having to remember that, I've published the info at
+          <a href="http://willthames.github.io">http://willthames.github.io</a><p>
         </section>
 
 
         <section>
           <h2>About me</h2>
           <p>
-            I build the future!&dagger;
+          I build the future!<sup>&dagger;</sup>
           </p>
           <ul><li>18 months with Suncorp</li>
             <li>8 years before that at Betfair in the UK</li>
           </ul>
 
-          <small>&dagger; see <a href="http://www.slideshare.net/littleidea/devops-whats-missing-whats-next">Devops, what's missing, what's next</a></small>
+          <sup><small>&dagger; see <a href="http://www.slideshare.net/littleidea/devops-whats-missing-whats-next">Devops, what's missing, what's next</a></small></sup>
           <aside class="notes">
              My experience is with heterogeneous environments in regulated financial organisations with multiple groups of people responsible for the configuration of any one system 
           </aside>
@@ -82,42 +80,51 @@ python -m SimpleHTTPServer</code></pre>
           </ul>
         </section>
 
-
-
         <section>
-          <h2>Pretty Code</h2>
-          <pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) ) {
-        node.className += ' roll';
-      }
-    };
-  }
-}
-          </code></pre>
-          <p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+          <h2>The reference example</h2>
+          <center><img class="image" src="devopsbrisansible.png"></center>
+            <p>This is a simple example website to demonstrate some of the 
+            concepts of good configuration management practices.
+            </p>
         </section>
 
         <section>
-          <h2>Spectacular image!</h2>
-          <a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-            <img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-          </a>
+          <h2>The naive approaches</h2>
+          <ul><li>Snowflake servers!</li>
+            <li>ssh in a for loop running a bash script on each server</li>
+            <li>version controlled per-server configuration</li>
+          </ul>
+
+          <aside class="notes">
+            Discuss what happens when common things change. e.g. version of
+            webserver, appserver, java
+          </aside>
+          </section>
+
+        <section>
+          <h2>Configuration management to the rescue?</h2>
+            <p>Take what we've being doing and apply ansible to it</p>
+
+            ...
         </section>
 
-
+        <section>
+          <h2>What can we improve?</h2>
+          <ul>
+            <li>All that copy and paste! Refactoring...</li>
+            <li>Modular runbooks</li>
+            <li>Hierarchical configuration</li>
+            <li>Repeatability</li>
+            <li>Security</li>
+          </ul>
+        </section>
+            
 
         <section>
           <h2>References</h2>
           <ul>
             <li><a href="http://www.ansibleworks.com">Ansible</a></li>
+            <li><a href="http://www.vagrantup.com">Vagrant</a></li>
             <li><a href="https://github.com/hakimel/reveal.js">Reveal.js (presentation software)</a></li>
           </ul>
         </section>
@@ -139,6 +146,7 @@ function linkify( selector ) {
         progress: true,
         history: true,
         center: true,
+        rollingLinks: false,
 
         theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none

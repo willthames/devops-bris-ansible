@@ -39,7 +39,7 @@
 
         <section>
           <h1>Configuration Management Development Principles</h1>
-          <h3>using Chef and Ansible examples</h3>
+          <h3>using Ansible examples</h3>
           <p>
             <small>Created by <a href="http://github.com/willthames">Will Thames</a> / <a href="http://twitter.com/willthames">@willthames</a></small>
           </p>
@@ -48,8 +48,8 @@
         <section>
           <h2>About this presentation</h2>
           <p>
-          This presentation is available at:<br/>
-          <a href="http://github.com/willthames/devops-bris-ansible">http://github.com/willthames/devops-bris-ansible/slides</a><br/></p>
+          This presentation is available on Github Pages at:<br/>
+          <a href="http://willthames.github.io/devops-bris-ansible/">http://willthames.github.io/devops-bris-ansible/</a><br/></p>
           <p>All code samples are included in the same repo, under examples</p>
           <p>To save you having to remember that, I've published the info at
           <a href="http://willthames.github.io">http://willthames.github.io</a><p>
@@ -77,7 +77,15 @@
             <li>Been around 18 months (first commit 23/02/2012)</li>
             <li>Daemon-less orchestration and config management tool - runs over ssh and uses existing privileges</li>
             <li>Recently raised US$6m in funding for their ansibleworks business, which offers enterprise features</li>
+            <li>Doesn't need root! (except to do things that need root)
           </ul>
+          
+        </section>
+
+        <section>
+          <h2>
+            This presentation is about Ansible, but the principles are
+            applicable to Chef, Puppet, Salt, Cfengine.</h2>
         </section>
 
         <section>
@@ -118,7 +126,58 @@
             <li>Security</li>
           </ul>
         </section>
+
+        <section>
+          <h2>Modularity</h2>
+          <p>Most configuration management platforms have a way to have runbooks that include
+          other runbooks.</p>
+          <p>Ansible recently introduced Role Dependencies, so that playbooks can include roles
+          which can include other roles</p>
+          <p>This means that e.g. installing java or logstash can be separated out to roles</p>
+        </section>
+
+        <section>
+          <h2>Hierarchical configuration</h2>
+          <p>Configuration is typically multi-dimensional:</p>
+          <ul><li>environment specific - e.g. what DBs applications talk to</li>
+            <li>application specific - which JVM an application uses, which log files should be
+            sent to log analysis, etc</li></ul>
+          <p>Also, there are typically groupings of targets - perhaps all Dev and Test nodes 
+          live in DC1 whereas Staging is in DC2 and Prod is in DC3. Or Test regions 1-3 talk
+          to TestDB1 and regions 4-6 talk to TestDB2.</p>
+        </section>
+
+
+        <section>
+          <h2>Repeatability</h2>
+          <p>There are two key elements to repeatability:
+          <ul><li><b>invariance</b>: The system should not change between runs of the same playbook, 
+            no matter how far apart</li>
+            <li><b>idempotency</b>: Running the same playbook twice should have no additional effects</li>
+          </ul>
+          <p>This means that runbooks that install the latest version of an artifact, or checkout HEAD
+          from version control are <b>not</b> repeatable.
+          <p>Checks should be made when adding things - e.g. lines to a config file to ensure that 
+          it doesn't happen again on a second run</p>
+        </section>
             
+        <section>
+          <h2>Version control is not just for application code</h2>
+          <p>It's probably obvious that you should commit your playbooks to 
+          version control.</p>
+          <p>But you also need to manage versions. So that you can run playbook v1.2 against dev,
+          v1.1 against test and v1.0 against prod as improvements flow through the pipeline.</p>
+          <p>There are many ways to achieve this, but cheap branching (typically DVCS) is an 
+          easy way - whether that's a dev branch or just pointing dev at the 1.2 branch.</p>
+        </section>
+
+        <section>
+          <h2>Security</h2>
+          <p>One thing you don't want is your production database passwords, or Amazon private keys,
+          or any other sensitive data written in plain text in source control.</p>
+          <p>Typically a solution is for the target nodes to have decryption keys and then the
+          configuration management software decrypting it as it writes the config file</p>
+        </section>
 
         <section>
           <h2>References</h2>

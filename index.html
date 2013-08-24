@@ -65,7 +65,7 @@
             <li>8 years before that at Betfair in the UK</li>
           </ul>
 
-          <sup><small>&dagger; see <a href="http://www.slideshare.net/littleidea/devops-whats-missing-whats-next">Devops, what's missing, what's next</a></small></sup>
+          <p><sup><small>&dagger; see <a href="http://www.slideshare.net/littleidea/devops-whats-missing-whats-next">Devops, what's missing, what's next</a></small></sup></p>
           <aside class="notes">
              My experience is with heterogeneous environments in regulated financial organisations with multiple groups of people responsible for the configuration of any one system 
           </aside>
@@ -83,9 +83,12 @@
         </section>
 
         <section>
-          <h2>
-            This presentation is about Ansible, but the principles are
-            applicable to Chef, Puppet, Salt, Cfengine.</h2>
+          <h3>
+            This presentation is about Ansible</h2>
+          <h3>The principles are
+            applicable to:</h2>
+          <h3>Chef, Puppet, Salt, Cfengine</h3>
+          <h3>etc...</h3>
         </section>
 
         <section>
@@ -207,8 +210,8 @@
         center: true,
         rollingLinks: false,
 
-        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        theme: Reveal.getQueryHash().theme || 'night', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
         // Optional libraries used to extend on reveal.js
         dependencies: [

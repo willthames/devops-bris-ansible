@@ -253,7 +253,8 @@ body {
 }
 
 .reveal p {
-	margin-bottom: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 	line-height: 1.2em;
 }
 
@@ -334,6 +335,11 @@ body {
 .reveal small * {
 	vertical-align: top;
 }
+
+.reveal li { 
+        margin-bottom: 20px;
+}
+
 
 
 /*********************************************

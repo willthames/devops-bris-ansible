@@ -92,6 +92,37 @@
         </section>
 
         <section>
+          <section>
+            <h2>Getting started with Ansible</h2>
+            <p>Install from OS package (yum, apt-get etc) or
+            <pre><code>git clone http://github.com/ansible/ansible
+pip install paramiko PyYAML jinja2
+mkdir ~/.ansible
+source ansible/hacking/env-setup -q</code></pre>
+          </section>
+
+          <section>
+            <h2>Setup Ansible config</h2>
+            <pre><code>cat &gt; ~/.ansible/config &lt;&lt; EOT
+[defaults]
+hostfile = ~/.ansible/hosts
+library = ~/src/ansible/library
+EOT</code></pre>
+           </section>
+           <section>
+             <h2>Talk to a target host</h2>
+             <ul>
+               <li>ssh-keygen (use a strong passphrase)</li>
+               <li>ssh-add (so you don't have to type your passphrase every connection)</li>
+               <li>ssh-copy-id $target (or OS equivalent)</li>
+            </ul>
+            <pre><code>ansible -m command -a date web
+127.0.0.2 | success | rc=0 >>
+Sun Aug 25 14:41:08 EST 2013</code></pre>
+           </section>
+        </section>
+
+        <section>
           <h2>The reference example</h2>
           <center><img class="image" src="devopsbrisansible.png"></center>
             <p>This is a simple example website to demonstrate some of the 
@@ -132,21 +163,23 @@
 
         <section>
           <h2>Modularity</h2>
-          <p>Most configuration management platforms have a way to have runbooks that include
-          other runbooks.</p>
-          <p>Ansible recently introduced Role Dependencies, so that playbooks can include roles
-          which can include other roles</p>
-          <p>This means that e.g. installing java or logstash can be separated out to roles</p>
+          <p>Most configuration management platforms have a way 
+          to have runbooks that include other runbooks.</p>
+          <p>Ansible recently introduced Role Dependencies, so that 
+          playbooks can include roles which can include other roles</p>
+          <p>This means that e.g. installing java or logstash can be 
+          separated out to roles</p>
         </section>
 
         <section>
           <h2>Hierarchical configuration</h2>
           <p>Configuration is typically multi-dimensional:</p>
           <ul><li>environment specific - e.g. what DBs applications talk to</li>
-            <li>application specific - which JVM an application uses, which log files should be
-            sent to log analysis, etc</li></ul>
-          <p>Also, there are typically groupings of targets - perhaps all Dev and Test nodes 
-          live in DC1 whereas Staging is in DC2 and Prod is in DC3. Or Test regions 1-3 talk
+            <li>application specific - which JVM an application uses, 
+            which log files should be sent to log analysis, etc</li></ul>
+          <p>Also, there are typically groupings of targets - perhaps 
+          all Dev and Test nodes live in DC1 whereas Staging is in DC2 
+          and Prod is in DC3. Or Test regions 1-3 talk
           to TestDB1 and regions 4-6 talk to TestDB2.</p>
         </section>
 
@@ -154,39 +187,61 @@
         <section>
           <h2>Repeatability</h2>
           <p>There are two key elements to repeatability:
-          <ul><li><b>invariance</b>: The system should not change between runs of the same playbook, 
-            no matter how far apart</li>
-            <li><b>idempotency</b>: Running the same playbook twice should have no additional effects</li>
+          <ul><li><b>invariance</b>: The system should not change between 
+            runs of the same playbook, no matter how long apart</li>
+            <li><b>idempotency</b>: Running the same playbook twice should 
+            have no additional effects</li>
           </ul>
-          <p>This means that runbooks that install the latest version of an artifact, or checkout HEAD
+          <p>This means that runbooks that install the latest version 
+          of an artifact, or checkout HEAD
           from version control are <b>not</b> repeatable.
-          <p>Checks should be made when adding things - e.g. lines to a config file to ensure that 
+          <p>Checks should be made when adding things - e.g. lines 
+          to a config file to ensure that 
           it doesn't happen again on a second run</p>
         </section>
             
         <section>
           <h2>Version control is not just for application code</h2>
           <p>It's probably obvious that you should commit your playbooks to 
-          version control.</p>
-          <p>But you also need to manage versions. So that you can run playbook v1.2 against dev,
-          v1.1 against test and v1.0 against prod as improvements flow through the pipeline.</p>
-          <p>There are many ways to achieve this, but cheap branching (typically DVCS) is an 
-          easy way - whether that's a dev branch or just pointing dev at the 1.2 branch.</p>
+          source control.</p>
+          <p>But you also need to manage versions. So that you can run 
+          playbook v1.2 against dev, v1.1 against test and v1.0 against 
+          prod as improvements flow through the pipeline.</p>
+          <p>There are many ways to achieve this, but cheap branching 
+          (typically DVCS) is an easy way - whether that's a dev branch 
+          or just pointing dev at the 1.2 branch.</p>
         </section>
 
         <section>
           <h2>Security</h2>
-          <p>One thing you don't want is your production database passwords, or Amazon private keys,
-          or any other sensitive data written in plain text in source control.</p>
-          <p>Typically a solution is for the target nodes to have decryption keys and then the
-          configuration management software decrypting it as it writes the config file</p>
+          <p>One thing you don't want is your production database 
+          passwords, or Amazon private keys, or any other sensitive 
+          data written in plain text in source control.</p>
+          <p>Typically a solution is for the target nodes to have 
+          decryption keys and then the configuration management 
+          software decrypting it as it writes the config file</p>
         </section>
+
+        <section>
+          <h2>Software development practices</h2>
+          <h3>Testing</h3>
+          <p>Unlike chef-cucumber and rspec-puppet, there are no common
+          frameworks yet available. Using vagrant to test your changes in 
+          a throwaway VM will work in some cases.</p>
+          <h3>Static Analysis</h3>
+          <p>Again, puppet has puppet-lint, chef has food-critic.</p>
+          <p>I've created an extensible (but currently minimal) lint 
+          for ansible at
+          <a href="http://github.com/willthames/ansible-lint">http://github.com/willthames/ansible-lint</a>
+        </section>
+          
 
         <section>
           <h2>References</h2>
           <ul>
             <li>Ansible: <a href="http://www.ansibleworks.com">http://www.ansibleworks.com</a></li>
             <li>Vagrant: <a href="http://www.vagrantup.com">http://www.vagrantup.com</a></li>
+            <li>ansible-lint: <a href="http://github.com/willthames/ansible-lint">http://github.com/willthames/ansible-lint</a></li>
             <li>Reveal.js: <a href="https://github.com/hakimel/reveal.js">https://github.com/hakimel/reveal.js</a></li>
           </ul>
         </section>
@@ -210,7 +265,7 @@
         center: true,
         rollingLinks: false,
 
-        theme: Reveal.getQueryHash().theme || 'night', // available themes are in /css/theme
+        theme: Reveal.getQueryHash().theme || 'default', // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
         // Optional libraries used to extend on reveal.js

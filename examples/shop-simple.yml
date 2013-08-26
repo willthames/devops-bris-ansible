@@ -1,0 +1,6 @@
+---
+- hosts: shop
+
+  tasks:
+  - name: pretend to install java 1.7u21
+    action: command mkdir -p /usr/local/jdk1.7u21

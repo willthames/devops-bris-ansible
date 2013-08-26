@@ -1,6 +1,9 @@
 About the examples
 ==================
 
+These examples relate to the my 
+[Slides for Devops Brisbane Ansible talk](http://willthames.github.io/devops-bris-ansible/)
+
 The examples in this repository use two VMs based on a single vagrant
 base box.
 

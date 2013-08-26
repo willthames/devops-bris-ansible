@@ -1,0 +1,5 @@
+[shop]
+shop ansible_ssh_user=vagrant ansible_ssh_host=localhost ansible_ssh_port=2202 ansible_connection=ssh
+
+[acct]
+acct ansible_ssh_user=vagrant ansible_ssh_host=localhost ansible_ssh_port=2203 ansible_connection=ssh

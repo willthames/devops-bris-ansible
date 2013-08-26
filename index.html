@@ -83,6 +83,18 @@
         </section>
 
         <section>
+          <h2>About Ansible</h2>
+          <ul>
+            <li>Very opinionated development lead</li>
+            <li>Assumes homogeneity (little abstraction of resources like
+            package installation etc.)</li>
+            <li>This is realistic within corporations, but reduces reuse</li>
+            <li>Task driven rather than convergence driven - much less
+            declarative than chef, let alone puppet</li>
+          </ul>
+        </section>
+          
+        <section>
           <h3>
             This presentation is about Ansible</h2>
           <h3>The principles are
@@ -122,13 +134,6 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
            </section>
         </section>
 
-        <section>
-          <h2>The reference example</h2>
-          <center><img class="image" src="devopsbrisansible.png"></center>
-            <p>This is a simple example website to demonstrate some of the 
-            concepts of good configuration management practices.
-            </p>
-        </section>
 
         <section>
           <h2>The naive approaches</h2>
@@ -183,6 +188,18 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           to TestDB1 and regions 4-6 talk to TestDB2.</p>
         </section>
 
+        <section>
+          <h2>Hierarchy in configuration</h2>
+          <center><img class="image" src="devopsbrisansible.png"></center>
+          <p>Here there would be things common to all shop servers, and
+          different things common to all account servers (e.g. JVM version,
+          log file names)
+
+          Also there will be commonalities among dev servers versus prod servers
+          e.g. log levels, mail gateways or log shipping destinations.
+            </p>
+        </section>
+
 
         <section>
           <h2>Repeatability</h2>
@@ -220,6 +237,7 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           <p>Typically a solution is for the target nodes to have 
           decryption keys and then the configuration management 
           software decrypting it as it writes the config file</p>
+          <p><code>ansible-vault</code> is still a work in progress.</p>
         </section>
 
         <section>
@@ -234,7 +252,14 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           for ansible at
           <a href="http://github.com/willthames/ansible-lint">http://github.com/willthames/ansible-lint</a>
         </section>
-          
+
+        <section>
+        <h2>What's missing</h2>
+        <ul>
+          <li>Testing framework</li>
+          <li>Sensitive data management</li>
+          <li>Community runbooks - or even the abstractions to allow reuse</li>
+        </ul>  
 
         <section>
           <h2>References</h2>

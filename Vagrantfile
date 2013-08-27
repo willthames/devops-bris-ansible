@@ -1,6 +1,3 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -13,14 +10,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define :shop do |shop|
     shop.vm.box = "centos64-64"
-    shop.vm.network :private_network, ip: "192.168.0.103"
     shop.vm.network :forwarded_port, guest: 22, host: 2202
     shop.vm.hostname = "shop"
   end
 
   config.vm.define :acct do |acct|
     acct.vm.box = "centos64-64"
-    acct.vm.network :private_network, ip: "192.168.0.102"
     acct.vm.network :forwarded_port, guest: 22, host: 2203
     acct.vm.hostname = "acct"
   end
@@ -30,6 +25,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.inventory_file = "ansible-hosts"
     ansible.sudo = true
   end
-
-
 end

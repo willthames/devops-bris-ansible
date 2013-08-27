@@ -3,7 +3,10 @@
 
   tasks:
   - name: add dummy host in /etc/hosts
-    action: lineinfile state=present regexp=repo.dev.example line='192.168.2.1      repo.dev.example' dest=/etc/hosts
+    action: lineinfile state=present regexp=repo.dev.example line='10.2.0.2      repo.dev.example' dest=/etc/hosts
 
   - name: ensure /usr/local is writable by admin group
     action: file state=directory group=admin mode=775 dest=/usr/local
+
+  - name: copy across ssh key
+    action: authorized_key user=vagrant key="{{ lookup('file', '~/.ssh/id_dsa.pub') }}"

@@ -2,5 +2,33 @@
 - hosts: shop
 
   tasks:
-  - name: pretend to install java 1.7u21
-    action: command mkdir -p /usr/local/jdk1.7u21
+  - name: ensure java install directory works
+    action: file state=directory dest=/usr/local/java
+
+  - name: download java
+    action: get_url url=http://repo.dev.example/java-1.7u21.tgz dest=/var/tmp/java-1.7u21.tgz
+
+  - name: install java
+    action: command chdir=/usr/local/java tar xzf /var/tmp/java-1.7u21.tgz
+
+  - name: download tomcat
+    action: get_url url=http://repo.dev.example/tomcat-7.0.25.tar.gz dest=/var/tmp/tomcat-7.0.25.tar.gz
+
+  - name: install tomcat
+    action: command chdir=/usr/local tar xzf /var/tmp/tomcat-7.0.25.tar.gz
+
+  - name: install shop app
+    action: copy src=files/shop.jar dest=/usr/local/tomcat/webapps/shop.jar
+    notify: start_tomcat
+
+  - name: set log shipping correctly
+    action: copy src=files/shop-logship.conf dest=/usr/local/etc/shop-logship.conf
+    notify: logshipper
+
+
+  handlers:
+  - name: logshipper
+    action: debug msg="this is where the logshipper service would be restarted"
+
+  - name: start_tomcat
+    action: command /usr/local/tomcat/bin/startup.sh 

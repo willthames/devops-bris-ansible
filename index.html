@@ -90,18 +90,42 @@
              </ul>
           </section>
           <section>
-            <pre><code>...</pre></code>
+            <pre><code>Vagrant.configure(2) do |config|
+
+  config.vm.define :shop do |shop|
+    shop.vm.box = "centos64-64"
+    shop.vm.network :private_network, ip: "192.168.0.2"
+    shop.vm.network :forwarded_port, guest: 22, host: 2202
+  end
+
+  config.vm.define :acct do |acct|
+    acct.vm.box = "centos64-64"
+    acct.vm.network :private_network, ip: "192.168.0.3"
+    acct.vm.network :forwarded_port, guest: 22, host: 2203
+  end
+
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = "provisioning/playbook.yml"
+    ansible.inventory_file = "provisioning/ansible_hosts"
+    ansible.sudo = true
+  end
+end<pre></code>
+          </section>
+          <section>
+            <pre><code>---
+- hosts: vagrant
+
+  tasks:
+  - name: add dummy host in /etc/hosts
+    action: lineinfile state=present regexp=repo.dev.example \
+                line='192.168.0.1      repo.dev.example'
+
+  - name: ensure /usr/local is writable by admin group
+    action: file state=directory group=admin mode=775 \
+                dest=/usr/local</pre></code>
           </section>
         </section>
 
-        <section>
-          <h3>
-            This presentation is about Ansible</h2>
-          <h3>The principles are
-            applicable to:</h2>
-          <h3>Chef, Puppet, Salt, Cfengine</h3>
-          <h3>etc...</h3>
-        </section>
 
         <section>
           <section>
@@ -132,6 +156,15 @@ EOT</code></pre>
 127.0.0.2 | success | rc=0 >>
 Sun Aug 25 14:41:08 EST 2013</code></pre>
            </section>
+        </section>
+
+        <section>
+          <h3>
+            This presentation is about Ansible</h3>
+          <h3>The principles are
+            applicable to:</h3>
+          <h3>Chef, Puppet, Salt, Cfengine</h3>
+          <h3>etc...</h3>
         </section>
 
         <section>

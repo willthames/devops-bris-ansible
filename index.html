@@ -205,7 +205,7 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           <h2>What can we improve?</h2>
           <ul>
             <li>All that copy and paste! Refactoring...</li>
-            <li>Modular runbooks</li>
+            <li>Modular playbooks</li>
             <li>Hierarchical configuration</li>
             <li>Repeatability</li>
             <li>Security</li>
@@ -215,7 +215,7 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
         <section>
           <h2>Modularity</h2>
           <p>Most configuration management frameworks have a way 
-          to have runbooks that include other runbooks.</p>
+          to have playbooks that include other playbooks.</p>
           <p>Ansible recently introduced Role Dependencies, so that 
           playbooks can include roles which can include other roles</p>
           <p>This means that e.g. installing java or logstash can be 
@@ -250,7 +250,7 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
             <li><b>idempotency</b>: Running the same playbook twice should 
             have no additional effects</li>
           </ul>
-          <p>This means that runbooks that install the latest version 
+          <p>This means that playbooks that install the latest version 
           of an artifact, or checkout HEAD
           from version control are <b>not</b> repeatable.
           <p>Checks should be made when adding things - e.g. lines 
@@ -300,7 +300,7 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
         <ul>
           <li>Testing framework</li>
           <li>Sensitive data management</li>
-          <li>Community runbooks - or even the abstractions to allow reuse</li>
+          <li>Community playbooks - or even the abstractions to allow reuse</li>
         </ul>  
         </section>
 
@@ -313,6 +313,10 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
             <li>Refactoring puppet: <a href="https://speakerdeck.com/jfryman/refactoring-puppet">https://speakerdeck.com/jfryman/refactoring-puppet</a></li>
             <li>Reveal.js: <a href="https://github.com/hakimel/reveal.js">https://github.com/hakimel/reveal.js</a></li>
           </ul>
+        </section>
+
+        <section>
+          <h1>Questions?</h1>
         </section>
 
 

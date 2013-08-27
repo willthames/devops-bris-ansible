@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -167,13 +167,6 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           <h3>etc...</h3>
         </section>
 
-        <section>
-          <h2>The reference example</h2>
-          <center><img class="image" src="devopsbrisansible.png"></center>
-            <p>This is a simple example website to demonstrate some of the 
-            concepts of good configuration management practices.
-            </p>
-        </section>
 
         <section>
           <h2>The naive approaches</h2>
@@ -228,6 +221,15 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           to TestDB1 and regions 4-6 talk to TestDB2.</p>
         </section>
 
+        <section>
+          <h2>Hierarchical configuration</h2>
+          <center><img class="image" src="devopsbrisansible.png"></center>
+            <p>Here there are likely elements common to the dev environment
+            such as mail gateways, log shipping destinations, log level.</p>
+            <p>There are also likely elements common to application type,
+            such as files to log ship, JVM versions etc. </p>
+        </section>
+
 
         <section>
           <h2>Repeatability</h2>
@@ -265,6 +267,7 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           <p>Typically a solution is for the target nodes to have 
           decryption keys and then the configuration management 
           software decrypting it as it writes the config file</p>
+          <p>ansible-vault remains a work in progress</p>
         </section>
 
         <section>
@@ -282,11 +285,12 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           
 
         <section>
-          <h2>References</h2>
+          <h2>Useful links</h2>
           <ul>
             <li>Ansible: <a href="http://www.ansibleworks.com">http://www.ansibleworks.com</a></li>
             <li>Vagrant: <a href="http://www.vagrantup.com">http://www.vagrantup.com</a></li>
             <li>ansible-lint: <a href="http://github.com/willthames/ansible-lint">http://github.com/willthames/ansible-lint</a></li>
+            <li>Refactoring puppet: <a href="https://speakerdeck.com/jfryman/refactoring-puppet">https://speakerdeck.com/jfryman/refactoring-puppet</a></li>
             <li>Reveal.js: <a href="https://github.com/hakimel/reveal.js">https://github.com/hakimel/reveal.js</a></li>
           </ul>
         </section>

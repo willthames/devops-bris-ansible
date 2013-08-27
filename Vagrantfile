@@ -13,19 +13,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define :shop do |shop|
     shop.vm.box = "centos64-64"
-    shop.vm.network :private_network, ip: "192.168.0.2"
+    shop.vm.network :private_network, ip: "192.168.0.103"
     shop.vm.network :forwarded_port, guest: 22, host: 2202
+    shop.vm.hostname = "shop"
   end
 
   config.vm.define :acct do |acct|
     acct.vm.box = "centos64-64"
-    acct.vm.network :private_network, ip: "192.168.0.3"
+    acct.vm.network :private_network, ip: "192.168.0.102"
     acct.vm.network :forwarded_port, guest: 22, host: 2203
+    acct.vm.hostname = "acct"
   end
 
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "provisioning/playbook.yml"
-    ansible.inventory_file = "provisioning/ansible_hosts"
+    ansible.inventory_file = "ansible-hosts"
     ansible.sudo = true
   end
 

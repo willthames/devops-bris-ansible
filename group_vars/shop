@@ -1,0 +1,5 @@
+warfile: devops-shop.war
+logs:
+  - { path: /usr/local/tomcat/logs/shop-access.log, index: shop, sourcetype: access }
+  - { path: /usr/local/tomcat/logs/shop-error.log, index: shop, sourcetype: error }
+  - { path: /usr/local/tomcat/logs/catalina.out, index: shop, sourcetype: catalina }

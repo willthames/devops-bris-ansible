@@ -1,5 +1,5 @@
 ---
-- hosts: shop
+- hosts: acct
 
   tasks:
   - name: ensure java install directory works
@@ -19,15 +19,15 @@
   - name: create symlink
     action: file state=link src=/usr/local/apache-tomcat-7.0.42 dest=/usr/local/tomcat 
 
-  - name: install shop app
-    action: get_url url=http://repo.dev.example:8000/devops-shop.war dest=/usr/local/tomcat/webapps/devops-shop.war
+  - name: install acct app
+    action: get_url url=http://repo.dev.example:8000/devops-acct.war dest=/usr/local/tomcat/webapps/devops-acct.war
     notify: start_tomcat
 
   - name: ensure log shipping config directory exists
     action: file state=directory dest=/usr/local/logshipper/etc
 
   - name: set log shipping correctly
-    action: copy src=files/shop-logship.conf dest=/usr/local/logshipper/etc/logship.conf
+    action: copy src=files/acct-logship.conf dest=/usr/local/logshipper/etc/logship.conf
     notify: logshipper
 
 

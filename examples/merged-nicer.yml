@@ -1,0 +1,48 @@
+---
+- hosts: shop
+
+  vars:
+    java_version: 1.7.0_25
+    java_archive: jdk-7u25-linux-x64.tar.gz
+    tomcat_version: 7.0.42
+    repo_url: http://repo.dev.example:8000
+    tmpdir: /var/tmp
+
+  tasks:
+  - name: ensure java install directory works
+    action: file state=directory dest=/usr/local/java
+
+  - name: download java
+    action: get_url url={{repo_url}}/{{java_archive}} dest={{tmpdir}}/{{java_archive}}
+
+  - name: install java
+    action: command chdir=/usr/local/java tar xzf {{tmpdir}}/{{java_archive}}
+
+  - name: download tomcat
+    action: get_url url={{repo_url}}/apache-tomcat-{{tomcat_version}}.tar.gz dest={{tmpdir}}/apache-tomcat-{{tomcat_version}}.tar.gz
+
+  - name: install tomcat
+    action: command chdir=/usr/local tar xzf {{tmpdir}}/apache-tomcat-{{tomcat_version}}.tar.gz
+
+  - name: create symlink
+    action: file state=link src=/usr/local/apache-tomcat-{{tomcat_version}} dest=/usr/local/tomcat 
+
+  - name: install app
+    action: get_url url={{repo_url}}/{{warfile}} dest=/usr/local/tomcat/webapps/{{warfile}}
+    notify: start_tomcat
+
+  - name: ensure log shipping config directory exists
+    action: file state=directory dest=/usr/local/logshipper/etc
+
+  - name: set log shipping correctly
+    action: template src=templates/logship.conf.tmpl dest=/usr/local/logshipper/etc/logship.conf
+    notify: logshipper
+
+
+  handlers:
+  - name: logshipper
+    action: debug msg="this is where the logshipper service would be restarted"
+
+  - name: start_tomcat
+    action: command /usr/local/tomcat/bin/startup.sh 
+    environment: JAVA_HOME=/usr/local/java/jdk-{{java_version}}

@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "provisioning/playbook.yml"
-    ansible.inventory_file = "ansible-hosts"
+    ansible.inventory_file = "hosts"
     ansible.sudo = true
   end
 end

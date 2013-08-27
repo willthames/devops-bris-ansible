@@ -1,0 +1,5 @@
+warfile: devops-acct.war
+logs:
+  - { path: /usr/local/tomcat/logs/acct-access.log, index: acct, sourcetype: access }
+  - { path: /usr/local/tomcat/logs/acct-error.log, index: acct, sourcetype: error }
+  - { path: /usr/local/tomcat/logs/catalina.out, index: acct, sourcetype: catalina }

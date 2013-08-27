@@ -1,0 +1,5 @@
+{% for log in logs %}
+[monitor://{{log.path}}
+sourcetype = {{log.sourcetype}}
+index = {{log.index}}
+{% endfor %}

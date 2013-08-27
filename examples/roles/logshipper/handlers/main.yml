@@ -1,0 +1,2 @@
+- name: logshipper
+  action: debug msg="this is where the logshipper service would be restarted"

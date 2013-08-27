@@ -1,0 +1,8 @@
+- name: ensure java install directory works
+  action: file state=directory dest=/usr/local/java
+
+- name: download java
+  action: get_url url=http://repo.dev.example/java-{{java_versionn}}.tgz dest={{tmpdir}}/java-{{java_version}}.tgz
+
+- name: install java
+  action: command chdir=/usr/local/java tar xzf {{tmpdir}}/java-{{java_version}}.tgz

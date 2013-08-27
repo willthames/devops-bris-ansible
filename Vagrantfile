@@ -23,4 +23,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     acct.vm.network :forwarded_port, guest: 22, host: 2203
   end
 
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = "provisioning/playbook.yml"
+    ansible.inventory_file = "provisioning/ansible_hosts"
+    ansible.sudo = true
+  end
+
+
 end

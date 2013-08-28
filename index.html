@@ -225,16 +225,15 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
         <section>
           <h2>Hierarchical configuration</h2>
           <p>Configuration is typically multi-dimensional:</p>
-          <ul><li>environment specific - e.g. what DBs applications talk to</li>
-            <li>application specific - which JVM an application uses, 
-            which log files should be sent to log analysis, etc</li></ul>
+          <ul><li>environment specific</li>
+            <li>application specific</li></ul>
           <p>Also, there are typically groupings of targets - e.g. dev
           environments and prod-like environments</p>
         </section>
 
         <section>
           <h2>Hierarchical configuration</h2>
-          <center><img class="image" src="devopsbrisansible.png"></center>
+          <center><img class="image" src="images/devopsbrisansible.png"></center>
             <p>Here there are likely elements common to the dev environment
             such as mail gateways, log shipping destinations, log level.</p>
             <p>There are also likely elements common to application type,
@@ -256,6 +255,11 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           <p>Checks should be made when adding things - e.g. lines 
           to a config file to ensure that 
           it doesn't happen again on a second run</p>
+          <aside>
+            bash scripts are terrible at idempotency - they error if you
+            add a user that doesn't exist, or create a symlink that already
+            exists
+          </aside>
         </section>
             
         <section>
@@ -296,11 +300,41 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
         </section>
 
         <section>
-        <h2>What's missing</h2>
+          <h2>What about the devops?</h2>
+          <ul>
+            <li>Developers can work with ops on playbooks that work in dev 
+            environments through to production - shared ownership</li>
+            <li>Operations can provide playbooks that setup and configure monitoring, 
+            log shipping - all devs have to do is set the right variables</li>
+            <li>Depending on environment (e.g. devs typically won't have
+            root privileges, ops won't know how best to deploy a particular application)
+            collaboration will be essential - talk to each other!</li>
+          </ul>
+        </section>
+ 
+        <section>
+          <h2>What about the devops...</h2>
+          <center><img class="image" src="images/elskataala.jpg"></center>
+          <div class="caption">Dev and Ops relaxed and happy</div>
+        </section>
+
+        <section>
+        <h2>Conclusions</h2>
+        <h3>Room for improvement</h3>
         <ul>
           <li>Testing framework</li>
           <li>Sensitive data management</li>
           <li>Community playbooks - or even the abstractions to allow reuse</li>
+        </ul>  
+        </section>
+
+        <section>
+        <h2>Conclusions</h2>
+        <h3>Where Ansible excels</h3>
+        <ul>
+          <li>Trivial to get going</li>
+          <li>Great for orchestration (even if you use chef or puppet, it's nice to have something to tell servers to update themselves!)</li>
+          <li>Improvements to core are happening rapidly - more modules, more modularity</li>
         </ul>  
         </section>
 
@@ -318,6 +352,8 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
 
         <section>
           <h1>Questions?</h1>
+          <center><img class="image" src="images/elskakeyboard.jpg"></center>
+          <div class="caption">Photo credits: <a href="http://www.flickr.com/petathames">Peta Thames</a></div>
         </section>
 
 

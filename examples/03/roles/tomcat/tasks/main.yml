@@ -1,0 +1,8 @@
+- name: download tomcat
+  action: get_url url={{repo_url}}/{{tomcat_archive}} dest={{tmpdir}}/{{tomcat_archive}}
+
+- name: install tomcat
+  action: command chdir=/usr/local creates={{tomcat_path}} tar xzf {{tmpdir}}/{{tomcat_archive}}
+
+- name: create symlink
+  action: file state=link src={{tomcat_path}} dest=/usr/local/tomcat 

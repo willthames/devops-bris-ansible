@@ -1,5 +1,0 @@
-- name: download tomcat
-  action: get_url url=http://repo.dev.example/tomcat-{{tomcat_version}}.tar.gz dest={{tmpdir}}/tomcat-{{tomcat_version}}.tar.gz
-
-- name: install tomcat
-  action: command chdir=/usr/local tar xzf {{tmpdir}}/tomcat-{{tomcat_version}}.tar.gz

@@ -1,0 +1,3 @@
+tmpdir: /var/tmp
+java_version: 1.{{jdk_major}}.0_{{jdk_minor}}
+java_archive: jdk-{{jdk_major}}u{{jdk_minor}}-linux-x64.tar.gz

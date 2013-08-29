@@ -1,0 +1,3 @@
+tmpdir: /var/tmp
+tomcat_archive: 'apache-tomcat-{{tomcat_version}}.tar.gz'
+tomcat_path: '/usr/local/apache-tomcat-{{tomcat_version}}'

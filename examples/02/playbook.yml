@@ -1,5 +1,5 @@
 ---
-- hosts: shop
+- hosts: all
 
   vars:
     java_version: 1.7.0_25
@@ -16,7 +16,7 @@
     action: get_url url={{repo_url}}/{{java_archive}} dest={{tmpdir}}/{{java_archive}}
 
   - name: install java
-    action: command chdir=/usr/local/java tar xzf {{tmpdir}}/{{java_archive}}
+    action: command chdir=/usr/local/java creates=/usr/local/java/jdk{{java_version}} tar xzf {{tmpdir}}/{{java_archive}}
 
   - name: download tomcat
     action: get_url url={{repo_url}}/apache-tomcat-{{tomcat_version}}.tar.gz dest={{tmpdir}}/apache-tomcat-{{tomcat_version}}.tar.gz

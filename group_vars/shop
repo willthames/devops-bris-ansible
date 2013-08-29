@@ -3,3 +3,6 @@ logs:
   - { path: /usr/local/tomcat/logs/shop-access.log, index: shop, sourcetype: access }
   - { path: /usr/local/tomcat/logs/shop-error.log, index: shop, sourcetype: error }
   - { path: /usr/local/tomcat/logs/catalina.out, index: shop, sourcetype: catalina }
+jdk_major: 7
+jdk_minor: 25
+tomcat_version: 7.0.42

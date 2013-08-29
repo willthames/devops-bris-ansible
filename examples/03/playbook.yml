@@ -1,0 +1,12 @@
+---
+- hosts: all
+
+  roles:
+    - java
+    - tomcat
+    - logshipper
+
+  tasks:
+  - name: install web application 
+    action: get_url url={{repo_url}}/{{warfile}} dest=/usr/local/tomcat/webapps/{{warfile}}
+    notify: start_tomcat

@@ -1,0 +1,3 @@
+- name: start_tomcat
+  action: command /usr/local/tomcat/bin/startup.sh 
+  environment: JAVA_HOME=/usr/local/java/jdk{{java_version}}

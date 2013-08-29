@@ -1,3 +1,0 @@
-- name: set log shipping correctly
-  action: template src=templates/logship.conf.tmpl dest=/usr/local/etc/shop-logship.conf
-  notify: logshipper

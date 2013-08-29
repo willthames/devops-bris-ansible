@@ -1,0 +1,6 @@
+- name: ensure log shipping config directory exists
+  action: file state=directory dest=/usr/local/logshipper/etc
+
+- name: set log shipping correctly
+  action: template src=logship.conf.tmpl dest=/usr/local/logshipper/etc/logship.conf
+  notify: logshipper

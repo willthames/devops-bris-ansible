@@ -1,0 +1,8 @@
+- name: ensure java install directory works
+  action: file state=directory dest=/usr/local/java
+
+- name: download java
+  action: get_url url={{repo_url}}/{{java_archive}} dest={{tmpdir}}/{{java_archive}}
+
+- name: install java
+  action: command creates=/usr/local/java/jdk{{java_version}} chdir=/usr/local/java tar xzf {{tmpdir}}/{{java_archive}}

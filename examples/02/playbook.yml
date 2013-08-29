@@ -18,7 +18,10 @@
   - name: install java
     action: command chdir=/usr/local/java creates=/usr/local/java/jdk{{java_version}} tar xzf {{tmpdir}}/{{java_archive}}
 
-  - name: download tomcat
+- name: add JAVA_HOME env dir
+  action: lineinfile dest=/home/vagrant/.bash_profile regexp=JAVA_HOME line="export JAVA_HOME=/usr/local/java/jdk{{java_version}}" state=present
+
+- name: download tomcat
     action: get_url url={{repo_url}}/apache-tomcat-{{tomcat_version}}.tar.gz dest={{tmpdir}}/apache-tomcat-{{tomcat_version}}.tar.gz
 
   - name: install tomcat
@@ -45,4 +48,4 @@
 
   - name: start_tomcat
     action: command /usr/local/tomcat/bin/startup.sh 
-    environment: JAVA_HOME=/usr/local/java/jdk-{{java_version}}
+    environment: { JAVA_HOME: "/usr/local/java/jdk{{java_version}}" }

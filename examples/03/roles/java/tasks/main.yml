@@ -6,3 +6,6 @@
 
 - name: install java
   action: command creates=/usr/local/java/jdk{{java_version}} chdir=/usr/local/java tar xzf {{tmpdir}}/{{java_archive}}
+
+- name: add JAVA_HOME env dir
+  action: lineinfile dest=/home/vagrant/.bash_profile regexp=JAVA_HOME line="export JAVA_HOME=/usr/local/java/jdk{{java_version}}" state=present

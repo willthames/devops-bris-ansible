@@ -11,12 +11,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :shop do |shop|
     shop.vm.box = "centos64-64"
     shop.vm.network :forwarded_port, guest: 22, host: 2202
+    shop.vm.network :forwarded_port, guest: 8080, host: 8083
     shop.vm.hostname = "shop"
   end
 
   config.vm.define :acct do |acct|
     acct.vm.box = "centos64-64"
     acct.vm.network :forwarded_port, guest: 22, host: 2203
+    acct.vm.network :forwarded_port, guest: 8080, host: 8083
     acct.vm.hostname = "acct"
   end
 

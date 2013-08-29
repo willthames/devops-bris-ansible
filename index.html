@@ -181,6 +181,11 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           <h3>etc...</h3>
         </section>
 
+        <section>
+          <h2>Example environment</h2>
+          <center><img class="image" src="images/devopsbrisansible.png"></center>
+            <p>We'll use this environment for discussion purposes</p>
+        </section>
 
         <section>
           <h2>The naive approaches</h2>
@@ -294,9 +299,22 @@ Sun Aug 25 14:41:08 EST 2013</code></pre>
           a throwaway VM will work in some cases.</p>
           <h3>Static Analysis</h3>
           <p>Again, puppet has puppet-lint, chef has food-critic.</p>
-          <p>I've created an extensible (but currently minimal) lint 
-          for ansible at
+        </section>
+        <section>
+          <h2>Announcing ansible-lint!!</h2>
+
+          <p>I've created an extensible lint for ansible at<br/>
           <a href="http://github.com/willthames/ansible-lint">http://github.com/willthames/ansible-lint</a>
+          <pre><code>$ bin/ansible-lint examples/example.yml
+[ANSIBLE0001] Old style (${var}) brackets
+examples/example.yml:10
+    action: command echo ${oldskool}
+
+[ANSIBLE0004] Checkouts must contain explicit version
+examples/example.yml:22
+    action: git a=b c=d
+
+...</code></pre>
         </section>
 
         <section>
